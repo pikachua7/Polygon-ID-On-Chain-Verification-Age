@@ -1,13 +1,12 @@
 async function main() {
-  //const verifierContract = "CGPA";
-  const verifierContract = "ReputationScore";
-  const verifierName = "ERC20zkAirdrop";
-  const verifierSymbol = "zkERC20";
-  const CGPA = await ethers.getContractFactory(verifierContract);
-  const cgpa = await CGPA.deploy();
+  const verifierContract = "ERC20Verifier";
+  const verifierName = "ERC20Verifier";
+  const verifierSymbol = "ERC20";
+  const ERC20Verifier = await ethers.getContractFactory(verifierContract);
+  const erc20Verifier = await ERC20Verifier.deploy(verifierName, verifierSymbol);
 
-  await cgpa.deployed();
-  console.log(verifierName, " tx hash:", cgpa.address);
+  await erc20Verifier.deployed();
+  console.log(verifierName, " tx hash:", erc20Verifier.address);
 }
 main()
   .then(() => process.exit(0))

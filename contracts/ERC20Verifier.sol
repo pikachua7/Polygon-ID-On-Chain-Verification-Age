@@ -13,7 +13,7 @@ contract ERC20Verifier is ERC20, ZKPVerifier {
     mapping(uint256 => address) public idToAddress;
     mapping(address => uint256) public addressToId;
 
-    uint256 public TOKEN_AMOUNT_FOR_AIRDROP_PER_ID = 5 * 10**uint(decimals());
+    uint256 public TOKEN_AMOUNT_PER_ID = 5 * 10**uint(decimals());
 
     constructor(string memory name_, string memory symbol_)
         ERC20(name_, symbol_)
@@ -45,9 +45,9 @@ contract ERC20Verifier is ERC20, ZKPVerifier {
         );
 
         uint256 id = inputs[validator.getChallengeInputIndex()];
-        // execute the airdrop
+        // execute the logic
         if (idToAddress[id] == address(0)) {
-            super._mint(_msgSender(), TOKEN_AMOUNT_FOR_AIRDROP_PER_ID);
+            super._mint(_msgSender(), TOKEN_AMOUNT_PER_ID);
             addressToId[_msgSender()] = id;
             idToAddress[id] = _msgSender();
         }

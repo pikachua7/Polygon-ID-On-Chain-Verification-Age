@@ -1,34 +1,26 @@
 async function main() {
 
   const circuitId = "credentialAtomicQuerySig";
+
   const validatorAddress = "0xb1e86C4c687B85520eF4fd2a0d14e81970a15aFB";
 
-  const schemaHash = "79f0ff9f92d3bdd3d401c4d2498cb61f" // extracted from PID Platform
+  const schemaHash = "6ebc2e19a4280fd84d76242eaa99cec6" // extracted from PID Platform
 
   const schemaEnd = fromLittleEndian(hexToBytes(schemaHash))
 
-  // const query = {
-  //   schema: ethers.BigNumber.from(schemaEnd),
-  //   slotIndex: 2,
-  //   operator: 3,
-  //   value: [8],
-  //   circuitId,
-  // };
 
   const query = {
     schema: ethers.BigNumber.from(schemaEnd),
     slotIndex: 2,
-    operator: 1,
-    value: [1, ...new Array(63).fill(0).map(i => 0)],
+    operator: 3,
+    value: [18, ...new Array(63).fill(0).map(i => 0)],
     circuitId,
   };
 
   // add the address of the contract just deployed
-  // ERC20VerifierAddress = "0x8869223ddCEe3997Dd62e3B82f2EceF292983915"
-  ERC20VerifierAddress = "0x44ef594D13fAa12e8B8F88298D94b81ED226aCE1";
+  ERC20VerifierAddress = "0x676A0270692461917E6A7fC6f92233E7418d3BBa";
 
-  //let erc20Verifier = await hre.ethers.getContractAt("CGPA", ERC20VerifierAddress)
-  let erc20Verifier = await hre.ethers.getContractAt("ReputationScore", ERC20VerifierAddress)
+  let erc20Verifier = await hre.ethers.getContractAt("ERC20Verifier", ERC20VerifierAddress)
 
   try {
     await erc20Verifier.setZKPRequest(
