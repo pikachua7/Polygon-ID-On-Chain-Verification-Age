@@ -1,8 +1,10 @@
-# Implement an ERC20 zk airdrop in 20 minutes with Polygon ID
+# Implement an ERC20 Transfer On chain Verification with Polygon ID
 
-Tutorial: https://0xpolygonid.github.io/tutorials/verifier/on-chain-verification/overview/
+## Article series to follow on Medium
 
-This tutorial uses [Hardhat](https://hardhat.org/) as a development environment and Polygon Mumbai testnet as the network.
+1. Part-1 : [Polygon-ID Core Concepts](https://medium.com/coinmonks/polygon-id-part-1-introduction-to-core-concepts-394681549f7c)
+2. Part-2 : [Creating and Issuance of Claims](https://medium.com/@atharvapaliwal7/polygon-id-part-2-creating-and-issuing-claims-4fda0d992b1d)
+3. Part-3 : [On chain verification by Verifier](https://medium.com/@atharvapaliwal7/polygon-id-part-3-on-chain-verification-by-verifier-e68338cd4846)
 
 ## Polygon ID Wallet setup
 
@@ -10,35 +12,46 @@ This tutorial uses [Hardhat](https://hardhat.org/) as a development environment 
 
 2. Open the app and set a pin for security
 
-3. Follow the [Issue a Polygon ID claim](https://polygontechnology.notion.site/Issue-yourself-a-KYC-Age-Credential-claim-a06a6fe048c34115a3d22d7d1ea315ea) doc to issue yourself a KYC Age Credential attesting your date of birth.
-
+3. Follow the [Issue a Polygon ID claim](https://platform-test.polygonid.com/sign-in) doc to issue yourself a Credential.
 
 ## Instructions to compile and deploy the smart contract
 
 1. Create a .env file in the root of this repo. Copy in .env.sample to add keys
-    `touch .env`
+   `touch .env`
 
 2. Install dependencies
-    `npm i`
+   `npm i`
 
 3. Compile smart contracts
-    `npx hardhat compile`
+   `npx hardhat compile`
 
 4. Deploy smart contracts
-    `npx hardhat run --network mumbai scripts/deploy.js`
- - results in x tx hash: 0xecf178144CceC09417412D66E2ecC8a2841eE228
- - example contract creation: https://mumbai.polygonscan.com/address/0xecf178144ccec09417412d66e2ecc8a2841ee228
+   `npx hardhat run --network mumbai scripts/deploy.js`
 
 5. Update the `ERC20VerifierAddress` variable in scripts/set-request.js with your deployed contract address
 
 6. Run set-request to send the zk request to the smart contract
-    `npx hardhat run --network mumbai scripts/set-request.js`
-    - Successful tx means the age query has been set up: https://mumbai.polygonscan.com/tx/0x2ddb2db7b3d35cf7cdf658209b257fd2a51c49df2249bf46ede8979eb8410ffb
+   `npx hardhat run --network mumbai scripts/set-request.js`
+   - Successful tx means the age query has been set up: Check on PolygonScan.
 
+## Design Proof Request for Frontend
 
-## Claim airdrop from a frontend
+1. Design a proof request: [Query Based Requests](https://0xpolygonid.github.io/tutorials/wallet/proof-generation/types-of-auth-requests-and-proofs/#query-based-request)
 
-1. Design a proof request (see my example in qrValueProofRequestExample.json) and more info in the docs: [Query Based Requests](https://0xpolygonid.github.io/tutorials/wallet/proof-generation/types-of-auth-requests-and-proofs/#query-based-request)
-    - Update the `contract_address` field to your deployed contract address
+   - Update the `contract_address` field to your deployed contract address
 
-2. Create a frontend with a QR code to the proof request. [Codesandbox example](https://codesandbox.io/s/zisu81?file=/index.js) A user should be able to scan the QR code from the Polygon ID app and trustlessly prove that they are old enough to claim the ERC20 airdrop without revealing their actual birthday. 
+2. Create a frontend with a QR code to the proof request. A user can scan the QR code from the Polygon ID app and trustlessly prove that they are old enough to claim the ERC20 token without revealing their actual date.
+
+## Screenshots / User flow
+
+<br/>
+<img src="./img/1.jpeg" width=800 />
+<img src="./img/2.jpeg" width=800 />
+<img src="./img/3.jpeg" width=800 />
+<img src="./img/4.jpeg" width=800 />
+<img src="./img/5.jpeg" width=800 />
+<img src="./img/6.jpeg" width=800 />
+<img src="./img/7.jpeg" width=800 />
+<img src="./img/8.jpeg" width=800 />
+<img src="./img/9.jpeg" width=800 />
+<img src="./img/10.jpeg" width=800 />
